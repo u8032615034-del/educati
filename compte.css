@@ -290,6 +290,11 @@ button, input, textarea, select {
     gap: 8px;
 }
 
+.payment-methods .fa-shield-alt {
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
 .payment-methods .fa-lock {
     color: var(--primary-color);
     font-size: 1.1em;
