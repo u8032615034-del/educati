@@ -147,43 +147,82 @@ button, input, textarea, select {
     font-weight: 600;
 }
 
-/* Navigation */
+/* Navigation minimaliste */
 .account-nav {
     flex: 1;
-    padding: 20px 0;
+    padding: 15px 10px;
     overflow-y: auto;
 }
 
 .nav-item {
     display: flex;
     align-items: center;
-    width: 100%;
-    padding: 12px 25px;
+    width: 90%;
+    margin: 4px auto;
+    padding: 12px 20px;
     background: none;
     border: none;
     color: var(--text-light);
     text-align: left;
     cursor: pointer;
-    transition: var(--transition);
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     font-size: 0.95em;
     font-weight: 500;
+    border-radius: 6px;
+    position: relative;
+    overflow: hidden;
 }
 
 .nav-item i {
     font-size: 1.1em;
-    margin-right: 12px;
+    margin-right: 15px;
     width: 24px;
     text-align: center;
+    color: var(--text-light);
+    transition: all 0.2s ease;
 }
 
-.nav-item:hover, .nav-item.active {
-    background: rgba(36, 113, 163, 0.05);
+.nav-item span {
+    position: relative;
+    z-index: 1;
+    transition: all 0.2s ease;
+}
+
+.nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--primary-color);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 0;
+}
+
+.nav-item:hover {
     color: var(--primary-color);
-    border-left: 3px solid var(--primary-color);
+    background: rgba(36, 113, 163, 0.05);
+}
+
+.nav-item:hover i {
+    transform: translateX(3px);
 }
 
 .nav-item.active {
-    font-weight: 600;
+    color: var(--primary-color);
+    font-weight: 500;
+    background: rgba(36, 113, 163, 0.03);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+.nav-item.active::before {
+    opacity: 0.1;
+}
+
+.nav-item.active i {
+    color: var(--primary-color);
 }
 
 /* Styles pour les méthodes de paiement */
