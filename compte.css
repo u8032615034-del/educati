@@ -127,6 +127,7 @@ button, input, textarea, select {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    background: #4a90e2; /* Même couleur que dans index.html */
     color: white;
     display: flex;
     align-items: center;
