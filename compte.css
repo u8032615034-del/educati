@@ -998,14 +998,14 @@ textarea.form-control {
 
 /* Icône Profil */
 .account-nav .nav-item[data-tab="profile"] i {
-    color: #2ecc71; /* Vert émeraude */
-    text-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+    color: #7f8c8d; /* Gris acier */
+    text-shadow: 0 0 5px rgba(127, 140, 141, 0.2);
 }
 
 /* Icône Sécurité */
 .account-nav .nav-item[data-tab="security"] i {
-    color: #e67e22; /* Orange */
-    text-shadow: 0 0 5px rgba(230, 126, 34, 0.3);
+    color: #3498db; /* Bleu clair */
+    text-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
 }
 
 /* Icône Préférences */
