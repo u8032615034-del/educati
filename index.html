@@ -25,9 +25,37 @@
         </ul>
     </nav>
     <div class="header-actions">
-        <a href="connexion.html" class="header-btn login-btn">Se connecter</a>
-        <a href="inscription.html" class="header-btn signup-btn">S'inscrire</a>
+        <div id="authButtons">
+            <a href="connexion.html" class="header-btn login-btn">Se connecter</a>
+            <a href="inscription.html" class="header-btn signup-btn">S'inscrire</a>
+        </div>
+        <div id="userAvatar" style="display: none; margin-left: 15px;">
+            <div class="avatar" id="userInitial" style="width: 40px; height: 40px; border-radius: 50%; background-color: #4a90e2; color: white; display: flex; align-items: center; justify-content: center; font-weight: bold; text-transform: uppercase; cursor: pointer;"></div>
+        </div>
     </div>
+    <script>
+        // Vérifier si l'utilisateur est connecté au chargement de la page
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('currentUser');
+            if (userData) {
+                const user = JSON.parse(userData);
+                // Masquer les boutons de connexion/inscription
+                document.getElementById('authButtons').style.display = 'none';
+                // Afficher l'avatar avec la première lettre du pseudo
+                const userInitial = document.getElementById('userInitial');
+                userInitial.textContent = user.pseudo.charAt(0).toUpperCase();
+                document.getElementById('userAvatar').style.display = 'flex';
+                
+                // Ajouter un événement de déconnexion au clic sur l'avatar
+                userInitial.addEventListener('click', function() {
+                    if (confirm('Voulez-vous vous déconnecter ?')) {
+                        localStorage.removeItem('currentUser');
+                        window.location.reload();
+                    }
+                });
+            }
+        });
+    </script>
 </header>
     <main class="container">
         <section class="hero">

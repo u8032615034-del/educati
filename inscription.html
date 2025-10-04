@@ -18,9 +18,9 @@
     <main class="container">
         <section class="hero">
             <h1>Inscription</h1>
-            <form class="form-box" autocomplete="on">
-                <label for="email">Identifiant</label>
-                <input type="email" id="email" name="email" required autocomplete="username">
+            <form id="inscriptionForm" class="form-box" autocomplete="on">
+                <label for="email">Pseudo</label>
+                <input type="text" id="pseudo" name="pseudo" required autocomplete="username">
                 <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required autocomplete="new-password">
                 <label for="confirm">Confirmer le mot de passe</label>
@@ -28,6 +28,32 @@
                 <button type="submit" class="upload-btn">Continuer</button>
             </form>
             <p style="margin-top:16px;">Déjà inscrit ? <a href="connexion.html">Se connecter</a></p>
+            <script>
+                document.getElementById('inscriptionForm').addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    
+                    const pseudo = document.getElementById('pseudo').value;
+                    const password = document.getElementById('password').value;
+                    const confirm = document.getElementById('confirm').value;
+                    
+                    if (password !== confirm) {
+                        alert('Les mots de passe ne correspondent pas');
+                        return;
+                    }
+                    
+                    // Création du compte utilisateur
+                    const user = {
+                        pseudo: pseudo,
+                        isLoggedIn: true
+                    };
+                    
+                    // Sauvegarde dans le localStorage
+                    localStorage.setItem('currentUser', JSON.stringify(user));
+                    
+                    // Redirection vers la page d'accueil
+                    window.location.href = 'index.html';
+                });
+            </script>
         </section>
     </main>
     <footer class="site-footer">
