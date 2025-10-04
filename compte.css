@@ -186,6 +186,49 @@ button, input, textarea, select {
     font-weight: 600;
 }
 
+/* Styles pour les méthodes de paiement */
+.payment-methods {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.payment-methods p {
+    color: var(--text-light);
+    margin-bottom: 15px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.payment-methods .fa-lock {
+    color: var(--primary-color);
+    font-size: 1.1em;
+}
+
+.payment-icons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-top: 10px;
+}
+
+.payment-icon {
+    height: 24px;
+    width: auto;
+    opacity: 0.8;
+    transition: opacity 0.3s ease, transform 0.2s ease;
+}
+
+.payment-icon:hover {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
 /* Sidebar footer */
 .sidebar-footer {
     padding: 20px;
