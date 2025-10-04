@@ -6,24 +6,25 @@
     <title>Lecteur PDF en ligne</title>
     <link rel="icon" href="icone.png" type="image/png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="index.css">
 </head>
 <body>
-    <div class="container">
-        <div class="upload-container">
-            <input type="file" id="fileInput" accept=".pdf">
-            <label for="fileInput" class="upload-btn" id="uploadBtn">Choisir un fichier PDF</label>
+    <header class="site-header">
+        <div class="logo-container">
+            <img src="icone.png" alt="Logo Educati" class="logo-icon">
+            <span class="logo-text">Educati</span>
         </div>
-        <div class="pdf-container">
-            <div class="pdf-controls">
-                <div class="logo-container">
-                    <img src="icone.png" alt="Logo" class="logo-icon">
-                    <span class="logo-text">Educati</span>
-                </div>
+    </header>
+    <main class="container">
+        <section class="hero">
+            <h1>Bienvenue sur Educati</h1>
+            <p>Sélectionnez un fichier PDF à consulter en ligne.</p>
+            <div class="upload-container">
+                <input type="file" id="fileInput" accept=".pdf">
+                <label for="fileInput" class="upload-btn" id="uploadBtn">Choisir un fichier PDF</label>
             </div>
-            <canvas id="pdfCanvas" style="display:none;"></canvas>
-        </div>
-    </div>
+        </section>
+    </main>
     <script>
     document.getElementById('fileInput').addEventListener('change', function(e) {
         const file = e.target.files[0];
@@ -39,5 +40,10 @@
         }
     });
     </script>
+    <footer class="site-footer">
+        <div class="footer-content">
+            <span>&copy; 2025 Educati. Tous droits réservés.</span>
+        </div>
+    </footer>
 </body>
 </html>
