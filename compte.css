@@ -127,7 +127,6 @@ button, input, textarea, select {
     width: 100px;
     height: 100px;
     border-radius: 50%;
-    background: var(--primary-color);
     color: white;
     display: flex;
     align-items: center;
