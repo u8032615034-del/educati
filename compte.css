@@ -989,6 +989,43 @@ textarea.form-control {
     color: #555;
 }
 
+/* Styles pour les icônes de la sidebar */
+/* Icône Vue d'ensemble */
+.account-nav .nav-item[data-tab="overview"] i {
+    color: #3498db; /* Bleu clair */
+    text-shadow: 0 0 5px rgba(52, 152, 219, 0.3);
+}
+
+/* Icône Profil */
+.account-nav .nav-item[data-tab="profile"] i {
+    color: #2ecc71; /* Vert émeraude */
+    text-shadow: 0 0 5px rgba(46, 204, 113, 0.3);
+}
+
+/* Icône Sécurité */
+.account-nav .nav-item[data-tab="security"] i {
+    color: #e67e22; /* Orange */
+    text-shadow: 0 0 5px rgba(230, 126, 34, 0.3);
+}
+
+/* Icône Préférences */
+.account-nav .nav-item[data-tab="preferences"] i {
+    color: #1abc9c; /* Turquoise */
+    text-shadow: 0 0 5px rgba(26, 188, 156, 0.3);
+}
+
+/* Icône Abonnement */
+.account-nav .nav-item[data-tab="subscription"] i {
+    color: #f1c40f; /* Jaune */
+    text-shadow: 0 0 5px rgba(241, 196, 15, 0.3);
+}
+
+/* Effet de survol pour toutes les icônes */
+.account-nav .nav-item:hover i {
+    transform: scale(1.1);
+    transition: transform 0.2s ease;
+}
+
 /* Effets de survol */
 .pricing-card:hover {
     transform: translateY(-5px);
