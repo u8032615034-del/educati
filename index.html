@@ -46,12 +46,10 @@
                 userInitial.textContent = user.pseudo.charAt(0).toUpperCase();
                 document.getElementById('userAvatar').style.display = 'flex';
                 
-                // Ajouter un événement de déconnexion au clic sur l'avatar
-                userInitial.addEventListener('click', function() {
-                    if (confirm('Voulez-vous vous déconnecter ?')) {
-                        localStorage.removeItem('currentUser');
-                        window.location.reload();
-                    }
+                // Redirection vers la page de compte au clic sur l'avatar
+                userInitial.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    window.location.href = 'compte.html';
                 });
             }
         });

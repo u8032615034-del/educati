@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Compte - Educati</title>
+    <link rel="icon" href="icone.png" type="image/png">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="compte.css">
+</head>
+<body>
+    <div class="account-container">
+        <!-- Sidebar -->
+        <aside class="account-sidebar">
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <div id="userInitialLarge" class="avatar-large"></div>
+                    <button class="edit-avatar-btn" title="Changer la photo">
+                        <i class="fas fa-camera"></i>
+                    </button>
+                </div>
+                <h2 id="userName" class="user-name"></h2>
+                <p id="userEmail" class="user-email"></p>
+                <div class="account-status">
+                    <span class="status-badge">Compte Standard</span>
+                </div>
+            </div>
+
+            <nav class="account-nav">
+                <button class="nav-item active" data-tab="overview">
+                    <i class="fas fa-home"></i>
+                    <span>Vue d'ensemble</span>
+                </button>
+                <button class="nav-item" data-tab="profile">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </button>
+                <button class="nav-item" data-tab="security">
+                    <i class="fas fa-lock"></i>
+                    <span>Sécurité</span>
+                </button>
+                <button class="nav-item" data-tab="preferences">
+                    <i class="fas fa-cog"></i>
+                    <span>Préférences</span>
+                </button>
+                <button class="nav-item" data-tab="subscription">
+                    <i class="fas fa-crown"></i>
+                    <span>Abonnement</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="btn btn-logout" onclick="logout();">
+                    <i class="fas fa-sign-out-alt"></i>
+                    <span>Se déconnecter</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Contenu principal -->
+        <main class="account-main">
+            <header class="main-header">
+                <h1>Tableau de bord</h1>
+                <div class="header-actions">
+                    <div class="notification-bell">
+                        <i class="far fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Section Vue d'ensemble (active par défaut) -->
+            <section id="overview" class="tab-content active">
+                <div class="welcome-banner">
+                    <div class="welcome-text">
+                        <h2>Bon retour, <span id="userFirstName"></span> !</h2>
+                        <p>Voici un aperçu de votre activité récente.</p>
+                    </div>
+                    <div class="welcome-illustration">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-book-open"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-value">12</span>
+                            <span class="stat-label">Documents</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-value">8h 42m</span>
+                            <span class="stat-label">Temps passé</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <div class="stat-details">
+                            <span class="stat-value">24</span>
+                            <span class="stat-label">Favoris</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="recent-activity">
+                    <h3>Activité récente</h3>
+                    <div class="activity-list">
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-file-upload"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Vous avez téléchargé un nouveau document</p>
+                                <span class="activity-time">Il y a 2 heures</span>
+                            </div>
+                        </div>
+                        <div class="activity-item">
+                            <div class="activity-icon">
+                                <i class="fas fa-search"></i>
+                            </div>
+                            <div class="activity-details">
+                                <p>Recherche effectuée : "Méthodologie de recherche"</p>
+                                <span class="activity-time">Il y a 5 heures</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Section Profil (cachée par défaut) -->
+            <section id="profile" class="tab-content">
+                <h2>Profil</h2>
+                <form class="profile-form">
+                    <div class="form-group">
+                        <label>Photo de profil</label>
+                        <div class="avatar-upload">
+                            <div class="avatar-preview" id="avatarPreview">
+                                <div id="profileInitial" class="avatar-initial"></div>
+                            </div>
+                            <div class="avatar-upload-actions">
+                                <button type="button" class="btn btn-outline">Changer</button>
+                                <button type="button" class="btn btn-text">Supprimer</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="pseudo">Pseudo</label>
+                            <input type="text" id="pseudo" name="pseudo" placeholder="Votre pseudo">
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="Votre email">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bio">À propos de moi</label>
+                        <textarea id="bio" name="bio" rows="4" placeholder="Décrivez-vous en quelques mots..."></textarea>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Enregistrer les modifications</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Section Sécurité (cachée par défaut) -->
+            <section id="security" class="tab-content">
+                <h2>Sécurité</h2>
+                <div class="security-card">
+                    <div class="security-icon">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="security-details">
+                        <h3>Mot de passe</h3>
+                        <p>Définissez un mot de passe fort pour protéger votre compte</p>
+                        <button class="btn btn-outline" id="changePasswordBtn">Modifier le mot de passe</button>
+                    </div>
+                </div>
+                
+                <div class="security-card">
+                    <div class="security-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="security-details">
+                        <h3>Connexions actives</h3>
+                        <p>Gérez les appareils connectés à votre compte</p>
+                        <button class="btn btn-outline">Voir les appareils</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Autres sections (cachées par défaut) -->
+            <section id="preferences" class="tab-content">
+                <h2>Préférences</h2>
+                <p>Section des préférences utilisateur</p>
+            </section>
+
+            <section id="subscription" class="tab-content">
+                <h2>Abonnement</h2>
+                <p>Section de gestion d'abonnement</p>
+            </section>
+        </main>
+    </div>
+
+    <!-- Modale de changement de mot de passe -->
+    <div id="passwordModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Modifier le mot de passe</h3>
+                <button class="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="passwordForm">
+                    <div class="form-group">
+                        <label for="currentPassword">Mot de passe actuel</label>
+                        <input type="password" id="currentPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newPassword">Nouveau mot de passe</label>
+                        <input type="password" id="newPassword" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirmer le nouveau mot de passe</label>
+                        <input type="password" id="confirmPassword" required>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-secondary close-modal">Annuler</button>
+                        <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Récupération des informations utilisateur
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('currentUser');
+            if (!userData) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            const user = JSON.parse(userData);
+            
+            // Mise à jour de l'interface utilisateur
+            const userInitial = user.pseudo ? user.pseudo.charAt(0).toUpperCase() : '';
+            document.getElementById('userInitialLarge').textContent = userInitial;
+            document.getElementById('profileInitial').textContent = userInitial;
+            
+            const userName = document.getElementById('userName');
+            const userEmail = document.getElementById('userEmail');
+            const userFirstName = document.getElementById('userFirstName');
+            
+            if (user.pseudo) {
+                userName.textContent = user.pseudo;
+                // Extraire le prénom (premier mot du pseudo)
+                const firstName = user.pseudo.split(' ')[0];
+                userFirstName.textContent = firstName;
+            } else {
+                userName.textContent = 'Utilisateur';
+                userFirstName.textContent = 'Utilisateur';
+            }
+            
+            if (user.email) {
+                userEmail.textContent = user.email;
+                document.getElementById('email').value = user.email;
+            } else {
+                userEmail.textContent = 'Aucun email fourni';
+            }
+            
+            if (user.pseudo) {
+                document.getElementById('pseudo').value = user.pseudo;
+            }
+
+            // Gestion des onglets
+            const navItems = document.querySelectorAll('.nav-item');
+            const tabContents = document.querySelectorAll('.tab-content');
+            
+            navItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    // Retirer la classe active de tous les éléments
+                    navItems.forEach(nav => nav.classList.remove('active'));
+                    tabContents.forEach(content => content.classList.remove('active'));
+                    
+                    // Ajouter la classe active à l'élément cliqué
+                    this.classList.add('active');
+                    const tabId = this.getAttribute('data-tab');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            // Gestion de la modale de mot de passe
+            const modal = document.getElementById('passwordModal');
+            const changePasswordBtn = document.getElementById('changePasswordBtn');
+            const closeModalBtns = document.querySelectorAll('.close-modal');
+            
+            if (changePasswordBtn) {
+                changePasswordBtn.addEventListener('click', function() {
+                    modal.style.display = 'flex';
+                });
+            }
+            
+            closeModalBtns.forEach(btn => {
+                btn.addEventListener('click', function() {
+                    modal.style.display = 'none';
+                });
+            });
+            
+            // Fermer la modale en cliquant en dehors
+            window.addEventListener('click', function(event) {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+            
+            // Gestion du formulaire de mot de passe
+            const passwordForm = document.getElementById('passwordForm');
+            if (passwordForm) {
+                passwordForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    const newPassword = document.getElementById('newPassword').value;
+                    const confirmPassword = document.getElementById('confirmPassword').value;
+                    
+                    if (newPassword !== confirmPassword) {
+                        alert('Les mots de passe ne correspondent pas');
+                        return;
+                    }
+                    
+                    // Ici, vous pourriez ajouter la logique pour mettre à jour le mot de passe
+                    alert('Mot de passe mis à jour avec succès !');
+                    modal.style.display = 'none';
+                    passwordForm.reset();
+                });
+            }
+            
+            // Mise à jour de la dernière connexion dans le stockage
+            user.lastLogin = new Date().toISOString();
+            localStorage.setItem('currentUser', JSON.stringify(user));
+        });
+        
+        // Fonction de déconnexion
+        function logout() {
+            if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            }
+        }
+    </script>
+</body>
+</html>

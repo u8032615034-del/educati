@@ -83,12 +83,33 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
 
-        // Vérification de la connexion au chargement
-        window.addEventListener('load', function() {
-            if (!navigator.onLine) {
-                window.location.href = 'offline.html';
+        // Gestion de l'utilisateur connecté
+        document.addEventListener('DOMContentLoaded', function() {
+            const userData = localStorage.getItem('currentUser');
+            const userInitial = document.getElementById('userInitial');
+            
+            if (userData && userInitial) {
+                const user = JSON.parse(userData);
+                userInitial.textContent = user.pseudo ? user.pseudo.charAt(0).toUpperCase() : '';
+                
+                // Redirection vers la page de compte au clic sur l'avatar
+                userInitial.onclick = function(e) {
+                    e.preventDefault();
+                    window.location.href = 'compte.html';
+                };
             }
         });
+
+        // Fonction de déconnexion
+        function logout() {
+            if (confirm('Voulez-vous vraiment vous déconnecter ?')) {
+                localStorage.removeItem('currentUser');
+                window.location.href = 'index.html';
+            }
+        }
+        
+        // Exporter la fonction pour qu'elle soit accessible depuis le HTML
+        window.logout = logout;
 
         // Surveillance des changements de connexion
         window.addEventListener('offline', function() {
