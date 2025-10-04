@@ -290,7 +290,8 @@ button, input, textarea, select {
     gap: 8px;
 }
 
-.payment-methods .fa-shield-alt {
+.payment-methods .fa-shield-alt,
+.faq-item .fa-comments {
     color: var(--primary-color);
     font-size: 1.1em;
 }
