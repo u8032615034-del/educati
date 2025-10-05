@@ -25,12 +25,22 @@ Une application web moderne et élégante pour rechercher et découvrir des info
 - Sauvegarde locale (LocalStorage)
 - Suppression facile des favoris
 
-### 📖 Lecture d'Articles
+### 📚 Lecture d'Articles
 - **Affichage enrichi** des articles Wikipedia
 - **Navigation interne** entre articles
 - **Synthèse vocale** (lecture audio des articles en français)
 - **Impression** des articles
+- **Export PDF** des articles avec mise en forme
 - **Images** chargées dynamiquement
+- **Notes personnelles** sur chaque plante
+
+### ✨ Fonctionnalités Avancées
+- **Système de cache intelligent** pour performances optimales
+- **Statistiques détaillées** (recherches, temps passé, articles lus)
+- **Notes personnelles** par plante
+- **Export PDF** professionnel
+- **Accessibilité ARIA** pour lecteurs d'écran
+- **Tracking du temps** passé sur l'application
 
 ### ⌨️ Raccourcis Clavier
 - `Ctrl/Cmd + K` : Focus sur la recherche
@@ -73,12 +83,13 @@ Une application web moderne et élégante pour rechercher et découvrir des info
 ```
 educati/
 │
-├── index.html          # Page principale de l'application
-├── style.css           # Styles CSS (thèmes clair/sombre)
-├── script.js           # Logique JavaScript
-├── icone.png           # Logo de l'application
-├── README.md           # Ce fichier
-└── .gitattributes      # Configuration Git
+├── index.html              # Page principale de l'application
+├── style.css               # Styles CSS (thèmes clair/sombre)
+├── script.js               # Logique JavaScript principale
+├── advanced-features.js    # Fonctionnalités avancées (cache, stats, notes, PDF)
+├── icone.png               # Logo de l'application
+├── README.md               # Ce fichier
+└── .gitattributes          # Configuration Git
 ```
 
 ## 🎨 Personnalisation
@@ -109,12 +120,13 @@ Modifiez les tags dans `index.html` :
 
 ## 🔧 Technologies Utilisées
 
-- **HTML5** - Structure sémantique
+- **HTML5** - Structure sémantique avec attributs ARIA
 - **CSS3** - Styles modernes avec variables CSS et animations
-- **JavaScript (ES6+)** - Logique applicative
+- **JavaScript (ES6+)** - Logique applicative modulaire
 - **Wikipedia API** - Données sur les plantes
-- **LocalStorage** - Sauvegarde locale des favoris et préférences
+- **LocalStorage** - Sauvegarde locale (favoris, notes, cache, stats)
 - **Web Speech API** - Synthèse vocale
+- **Print API** - Export PDF
 
 ## 🌐 API Utilisée
 
@@ -137,14 +149,17 @@ L'application utilise l'[API Wikipédia](https://www.mediawiki.org/wiki/API:Main
 
 ## 🎯 Fonctionnalités Futures
 
-- [ ] Export des articles en PDF
+- [x] Export des articles en PDF ✓
+- [x] Système de notes et commentaires personnels ✓
+- [x] Système de cache intelligent ✓
+- [x] Statistiques utilisateur ✓
 - [ ] Partage sur les réseaux sociaux
 - [ ] Mode hors-ligne avec Service Workers
-- [ ] Comparaison de plantes côte à côte
+- [ ] Comparaison de plantes côte à côte (en développement)
 - [ ] Graphique de croissance des plantes
 - [ ] Calendrier de plantation
-- [ ] Système de notes et commentaires personnels
 - [ ] Intégration avec d'autres APIs botaniques
+- [ ] Système de badges et achievements
 
 ## 🐛 Résolution de Problèmes
 

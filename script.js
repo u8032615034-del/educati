@@ -415,11 +415,75 @@ const OpenFarm = {
         }
     },
     
+    displayCachedResults(results, query) {
+        this.elements.searchResults.innerHTML = `
+            <div class="results-header">
+                <h2>📚 Résultats pour "${query}" (${results.length}) <span style="color: var(--primary-color); font-size: 0.8em;">⚡ Cache</span></h2>
+            </div>
+            <div class="results-container"></div>
+        `;
+        const resultsContainer = this.elements.searchResults.querySelector('.results-container');
+        
+        results.forEach((result, index) => {
+            const pageUrl = `https://fr.wikipedia.org/?curid=${result.pageid}`;
+            const snippet = result.snippet.replace(/<span class="searchmatch">/g, '<strong>').replace(/<\/span>/g, '</strong>');
+            
+            const resultElement = document.createElement('div');
+            resultElement.className = 'result-item';
+            resultElement.style.animationDelay = `${index * 0.1}s`;
+            
+            resultElement.innerHTML = `
+                <div class="image-container">
+                    <div class="image-placeholder">
+                        <div class="skeleton"></div>
+                    </div>
+                </div>
+                <div class="result-content">
+                    <h3><a href="#" class="article-link" data-page-id="${result.pageid}" data-title="${result.title}">${result.title}</a></h3>
+                    <p class="snippet">${snippet}...</p>
+                    <div class="result-actions">
+                        <a href="#" class="read-more article-link" data-page-id="${result.pageid}" data-title="${result.title}">📚 Lire l'article</a>
+                        <a href="${pageUrl}" class="external-link" target="_blank" rel="noopener noreferrer">🔗 Voir sur Wikipédia</a>
+                    </div>
+                </div>
+            `;
+            
+            resultsContainer.appendChild(resultElement);
+            
+            this.fetchPlantImage(result.pageid, resultElement, result.title);
+            
+            const articleLinks = resultElement.querySelectorAll('.article-link');
+            articleLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const pageId = link.getAttribute('data-page-id');
+                    const title = link.getAttribute('data-title');
+                    this.showWikipediaArticle(pageId, title);
+                });
+            });
+        });
+    },
+    
     async searchPlant() {
         const query = this.elements.searchInput.value.trim();
         if (query === '') {
             this.elements.searchResults.innerHTML = '<p class="error">⚠️ Veuillez entrer un terme de recherche.</p>';
             return;
+        }
+        
+        // Enregistrer la recherche dans les stats
+        if (window.StatsManager) {
+            window.StatsManager.incrementSearches(query);
+        }
+        
+        // Vérifier le cache
+        const cacheKey = `search_${query}`;
+        if (window.CacheManager) {
+            const cached = window.CacheManager.get(cacheKey);
+            if (cached) {
+                this.displayCachedResults(cached, query);
+                return;
+            }
         }
         
         this.elements.searchResults.innerHTML = `
@@ -452,6 +516,11 @@ const OpenFarm = {
                 <div class="results-container"></div>
             `;
             const resultsContainer = this.elements.searchResults.querySelector('.results-container');
+            
+            // Mettre en cache les résultats
+            if (window.CacheManager) {
+                window.CacheManager.set(cacheKey, searchData.query.search);
+            }
             
             searchData.query.search.forEach((result, index) => {
                 const pageUrl = `https://fr.wikipedia.org/?curid=${result.pageid}`;
@@ -587,6 +656,12 @@ const OpenFarm = {
                                     <button class="article-control-btn" id="printBtn">
                                         🖨️ Imprimer
                                     </button>
+                                    <button class="article-control-btn" id="exportPdfBtn">
+                                        📝 PDF
+                                    </button>
+                                    <button class="article-control-btn" id="noteBtn" data-page-id="${pageId}" data-title="${title}">
+                                        📝 Note
+                                    </button>
                                     <a href="https://fr.wikipedia.org/?curid=${pageId}" target="_blank" class="external-link">🔗 Version complète</a>
                                 </div>
                             </div>
@@ -680,6 +755,42 @@ const OpenFarm = {
                     printBtn.addEventListener('click', () => {
                         window.print();
                     });
+                }
+                
+                // Bouton export PDF
+                const exportPdfBtn = document.getElementById('exportPdfBtn');
+                if (exportPdfBtn && window.PDFExporter) {
+                    exportPdfBtn.addEventListener('click', async () => {
+                        const articleContent = document.querySelector('.article-content');
+                        if (articleContent) {
+                            this.showToast('Préparation du PDF...', 'info', 2000);
+                            const success = await window.PDFExporter.exportArticle(title, articleContent.innerHTML);
+                            if (success) {
+                                this.showToast('PDF prêt !', 'success');
+                            } else {
+                                this.showToast('Erreur lors de l\'export PDF', 'error');
+                            }
+                        }
+                    });
+                }
+                
+                // Bouton note
+                const noteBtn = document.getElementById('noteBtn');
+                if (noteBtn && window.showNotesModal) {
+                    const hasNote = window.NotesManager && window.NotesManager.has(pageId);
+                    if (hasNote) {
+                        noteBtn.classList.add('active');
+                        noteBtn.innerHTML = '📝 Note ✓';
+                    }
+                    
+                    noteBtn.addEventListener('click', () => {
+                        window.showNotesModal(pageId, title);
+                    });
+                }
+                
+                // Ajouter aux stats
+                if (window.StatsManager) {
+                    window.StatsManager.addArticleRead(pageId, title);
                 }
                 
                 // Ajouter à l'historique
