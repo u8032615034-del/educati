@@ -172,6 +172,8 @@ button, input, textarea, select {
     font-weight: 600;
     margin: 10px 0 5px;
     color: var(--text-color);
+    text-transform: capitalize;
+    letter-spacing: normal;
 }
 
 .user-email {
